@@ -1,7 +1,14 @@
 import React from 'react'
 
-const Membre = () => (
-        <h2>Membre de ma famille</h2>
-    )
+const Membre = ({ nom, age, children }) => {
+  return (
+    <>
+      <h2>
+        {nom.toUpperCase()} : {age}
+      </h2>
+      {children ? <p>{children}</p> : <></>}
+    </>
+  )
+}
 
 export default Membre
