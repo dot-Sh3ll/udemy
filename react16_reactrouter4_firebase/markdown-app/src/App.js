@@ -15,18 +15,16 @@ class App extends Component {
     if (text) {
       this.setState({ text })
     } else {
-      this.setState({ sampleText })
+      this.setState({ text: sampleText })
     }
   }
 
   componentDidUpdate () {
-    const { text } = this.state
-    localStorage.setItem('text', text)
+    localStorage.setItem('text', this.state.text)
   }
 
   handleChange = event => {
-    const text = event.target.value
-    this.setState({ text })
+    this.setState({ text: event.target.value })
   }
 
   renderText = text => {
@@ -40,8 +38,8 @@ class App extends Component {
         <div className='row'>
           <div className='col-sm-6'>
             <textarea
-              onChange={this.handleChange}
               value={this.state.text}
+              onChange={this.handleChange}
               className='form-control'
               rows='35'
             />
