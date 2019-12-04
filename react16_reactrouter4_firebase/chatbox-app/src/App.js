@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react'
 import './App.css'
+import './animation.css'
 
 import Formulaire from './components/Formulaire'
 import Message from './components/Message'
@@ -7,12 +8,17 @@ import Message from './components/Message'
 // Firebase
 import base from './base'
 
+// Animation
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+
 class App extends Component {
   state = {
     messages: {},
     // on récupère le pseudo dans l'extension react de chrome en cherchant
     pseudo: this.props.match.params.pseudo
   }
+
+  isUser = pseudo => pseudo === this.state.pseudo
 
   // importation de createRef() pour la faire vivre dans l'application (permet la manipulation du dom)
   messagesRef = createRef()
@@ -50,18 +56,20 @@ class App extends Component {
       // qui a pour clef celle des messages
       .keys(this.state.messages)
       .map(key => (
-        <Message
-          key={key}
-          pseudo={this.state.messages[key].pseudo}
-          message={this.state.messages[key].message}
-        />
+        <CSSTransition timeout={200} classNames='fade' key={key}>
+          <Message
+            isUser={this.isUser}
+            pseudo={this.state.messages[key].pseudo}
+            message={this.state.messages[key].message}
+          />
+        </CSSTransition>
       ))
 
     return (
       <div className='box'>
         <div>
           <div className='messages' ref={this.messagesRef}>
-            <div className='message'>{messages}</div>
+            <TransitionGroup className='message'>{messages}</TransitionGroup>
           </div>
         </div>
         <Formulaire
