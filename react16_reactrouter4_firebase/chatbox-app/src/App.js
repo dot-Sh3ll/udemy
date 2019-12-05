@@ -30,7 +30,7 @@ class App extends Component {
       state: 'messages'
     })
   }
-
+ 
   componentDidUpdate () {
     // dans le chat, permet de scroller automatiquement en bas des derniers messages
     const ref = this.messagesRef.current
