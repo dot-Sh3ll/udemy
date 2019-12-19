@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import AjouterRecette from './AjouterRecette'
 import AdminForm from './AdminForm'
 import Login from './Login'
-
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import base, { firebaseApp } from '../base'
@@ -15,7 +14,6 @@ export default class Admin extends Component {
   }
 
   componentDidMount() {
-    // 
     firebase.auth().onAuthStateChanged(user =>{
       if (user) {
         this.handleAuth({user})
